@@ -15,5 +15,8 @@
     "express": "^4.19.2",
     "fs": "^0.0.1-security",
     "node-fetch": "^2.7.0"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   }
 }

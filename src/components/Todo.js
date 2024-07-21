@@ -47,7 +47,7 @@ const Todo = () => {
 
   useEffect(() => {
     updateCompletedCount();
-  }, [todos]);
+  });
 
   return (
     <div className="container mx-auto p-4">
