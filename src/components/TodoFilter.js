@@ -14,6 +14,7 @@ const TodoFilter = ({ searchTerm, handleSearch }) => {
       value={term}
       onChange={handleChange}
       placeholder="Search todos"
+      className="max-w-md mx-auto p-3 text-lg border border-r-8 bg-black text-cyan-200 rounded w-full mb-3"
     />
   );
 };

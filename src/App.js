@@ -18,8 +18,8 @@ const App = () => {
   };
 
   return (
-    <Router>
-      <div className="App">
+    <div className="App">
+      <Router>
         <Routes>
           <Route path="/signup" element={<SignUp></SignUp>}></Route>
           <Route
@@ -32,8 +32,8 @@ const App = () => {
           ></Route>
           <Route path="/" element={<SignUp></SignUp>}></Route>
         </Routes>
-      </div>
-    </Router>
+      </Router>
+    </div>
   );
 };
 

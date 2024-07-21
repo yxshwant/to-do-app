@@ -43,15 +43,18 @@ const Todo = () => {
     const completedCount = todos.filter((todo) => todo.isCompleted).length;
     setCompletedItems(completedCount);
   };
+
   useEffect(() => {
     updateCompletedCount();
   }, [todos]);
 
   return (
-    <div>
-      <h1>
-        📝<u>Todo List</u>
-      </h1>
+    <div className="container mx-auto p-4">
+      <div className="max-w-md mx-auto h-20 bg-orange-400 flex items-center justify-center mb-4 rounded-md">
+        <h1 className="text-3xl font-bold text-black bg-transparent">
+          📝TODOit.
+        </h1>
+      </div>
       <TodoForm addTodo={addTodo} />
       <TodoFilter searchTerm={searchTerm} handleSearch={handleSearch} />
       <TodoList
@@ -61,7 +64,7 @@ const Todo = () => {
         toggleComplete={toggleComplete}
         updateCompletedCount={updateCompletedCount}
       />
-      <p>
+      <p className="bg-black text-white text-lg mt-4">
         Completed Items: {completedItems} / {todos.length}
       </p>
     </div>

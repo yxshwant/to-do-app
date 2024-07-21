@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const SignUp = () => {
   const [userData, setUserData] = useState({
@@ -60,30 +60,44 @@ const SignUp = () => {
   };
 
   return (
-    <div>
-      <h2>Sign Up</h2>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+    <div className="container mx-auto p-4">
+      <h2 className="max-w-md mx-auto h-20 flex items-center justify-center rounded-md text-3xl font-bold text-blue-400 mb-4 bg-black">
+        Sign Up
+      </h2>
+      {error && <p className="text-xl text-red-500 mb-4">{error}</p>}
       {/* Display error message */}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Username:</label>
+      <form onSubmit={handleSubmit} className="flex-col gap-4">
+        <div className="flex flex-colflex flex-col max-w-md mx-auto items-center justify-center sm:flex-row gap-2 mb-4">
+          <label className="font-mono m-4 text-xl">Username:</label>
           <input
+            className="font-semibold p-2 border roundedfont-semibold p-2 border bg-transparent rounded"
             type="text"
             name="username"
+            placeholder="Enter Username"
             value={userData.username}
             onChange={handleChange}
           />
         </div>
-        <div>
-          <label>Password:</label>
+        <div className="flex flex-col max-w-md mx-auto items-center justify-center sm:flex-row gap-2 mb-4">
+          <label className="font-mono m-4 text-xl">Password:</label>
           <input
+            className="font-semibold p-2 border bg-transparent rounded"
             type="password"
             name="password"
+            placeholder="Enter Password"
             value={userData.password}
             onChange={handleChange}
           />
         </div>
-        <button type="submit">Sign Up</button>
+        <button type="submit" className="p-2 bg-green-500 text-white text-lg rounded">
+          Sign Up
+        </button>
+        <p className="text-blue-600 text-lg mt-3">
+          Already signed up?{" "}
+          <Link to="/signin" className="text-blue-600 underline">
+            Sign-In
+          </Link>
+        </p>
       </form>
     </div>
   );

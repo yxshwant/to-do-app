@@ -20,7 +20,7 @@ const TodoItem = ({ todo, index, updateTodo, deleteTodo, toggleComplete }) => {
   };
 
   return (
-    <div>
+    <div className="max-w-md mx-auto flex items-center gap-2 mb-2">
       {isEditing ? (
         <input
           type="text"
@@ -29,22 +29,30 @@ const TodoItem = ({ todo, index, updateTodo, deleteTodo, toggleComplete }) => {
           required
           onBlur={handleBlur}
           onKeyPress={handleKeyPress}
+          className="flex-1 p-2 border rounded"
         />
       ) : (
         <span
-          style={{
-            textDecoration: todo.isCompleted ? "line-through" : "",
-            color: todo.isCompleted ? "green" : "red",
-          }}
+          className={`flex-1 p-2 border rounded ${
+            todo.isCompleted ? "line-through text-green-500" : "text-red-500"
+          }`}
           onDoubleClick={() => setIsEditing(true)}
         >
           {todo}
         </span>
       )}
-      <button onClick={() => toggleComplete(index)}>
+      <button
+        onClick={() => toggleComplete(index)}
+        className="p-2 bg-yellow-500 text-white rounded"
+      >
         {todo.isCompleted ? "Mark as Pending" : "Mark as Completed"}
       </button>
-      <button onClick={() => deleteTodo(index)}>Delete</button>
+      <button
+        onClick={() => deleteTodo(index)}
+        className="p-2 bg-red-500 text-white rounded"
+      >
+        Delete
+      </button>
     </div>
   );
 };
