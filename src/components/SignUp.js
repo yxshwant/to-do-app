@@ -70,7 +70,7 @@ const SignUp = () => {
         <div className="flex flex-colflex flex-col max-w-md mx-auto items-center justify-center sm:flex-row gap-2 mb-4">
           <label className="font-mono m-4 text-xl">Username:</label>
           <input
-            className="font-semibold p-2 border roundedfont-semibold p-2 border bg-transparent rounded"
+            className="font-semibold p-2 border bg-transparent rounded"
             type="text"
             name="username"
             placeholder="Enter Username"
