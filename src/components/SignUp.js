@@ -19,7 +19,7 @@ const SignUp = () => {
 
   const validateForm = () => {
     if (!userData.username || !userData.password) {
-      setError("Username and password are required.");
+      setError("Username and Password are required.");
       return false;
     }
     return true;
@@ -89,7 +89,10 @@ const SignUp = () => {
             onChange={handleChange}
           />
         </div>
-        <button type="submit" className="p-2 bg-green-500 text-white text-lg rounded">
+        <button
+          type="submit"
+          className="p-2 bg-green-500 text-white text-lg rounded"
+        >
           Sign Up
         </button>
         <p className="text-blue-600 text-lg mt-3">

@@ -33,8 +33,8 @@ const TodoItem = ({ todo, index, updateTodo, deleteTodo, toggleComplete }) => {
         />
       ) : (
         <span
-          className={`flex-1 p-2 border rounded ${
-            todo.isCompleted ? "line-through text-green-500" : "text-red-500"
+          className={`flex-1 p-2 border rounded overflow-hidden ${
+            todo.isCompleted ? "text-green-500" : "text-red-500"
           }`}
           onDoubleClick={() => setIsEditing(true)}
         >
@@ -43,13 +43,13 @@ const TodoItem = ({ todo, index, updateTodo, deleteTodo, toggleComplete }) => {
       )}
       <button
         onClick={() => toggleComplete(index)}
-        className="p-2 bg-yellow-500 text-white rounded"
+        className="status p-2 bg-yellow-500 text-black rounded"
       >
         {todo.isCompleted ? "Mark as Pending" : "Mark as Completed"}
       </button>
       <button
         onClick={() => deleteTodo(index)}
-        className="p-2 bg-red-500 text-white rounded"
+        className="delete p-2 bg-red-500 text-black rounded"
       >
         Delete
       </button>
