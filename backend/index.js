@@ -3,6 +3,16 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const fetch = require("node-fetch");
 
+const jsonServer = require("json-server");
+const server = jsonServer.create();
+const router = jsonServer.router("data.json");
+const middlewares = jsonServer.defaults();
+const port = process.env.PORT || 5500;
+
+server.use(middlewares);
+server.use(router);
+server.listen(port);
+
 const app = express();
 const PORT = 5000;
 const JSON_SERVER_URL = "http://localhost:5500/users";
