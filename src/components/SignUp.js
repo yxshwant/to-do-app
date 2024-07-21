@@ -32,7 +32,7 @@ const SignUp = () => {
       return; // Stop form submission if validation fails
     }
 
-    fetch("http://localhost:5000/signup", {
+    fetch("${process.env.REACT_APP_BACKEND_URL}/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
