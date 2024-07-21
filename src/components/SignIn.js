@@ -17,7 +17,7 @@ const SignIn = ({ onAuth }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("${process.env.REACT_APP_BACKEND_URL}/signin", {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/signin`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
