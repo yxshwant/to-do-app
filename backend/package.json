@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node index.js",
+    "dev": "node server.js",
     "build": "npm i"
   },
   "keywords": [],
@@ -16,6 +16,8 @@
     "cors": "^2.8.5",
     "express": "^4.19.2",
     "fs": "^0.0.1-security",
+    "json-serve": "^0.1.0",
+    "json-server": "^1.0.0-beta.1",
     "node-fetch": "^2.7.0"
   },
   "devDependencies": {
