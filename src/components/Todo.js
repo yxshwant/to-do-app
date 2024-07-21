@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
 import TodoFilter from "./TodoFilter";
@@ -67,6 +68,11 @@ const Todo = () => {
       <p className="bg-black text-white text-lg mt-4">
         Completed Items: {completedItems} / {todos.length}
       </p>
+      <Link to="/signout">
+        <button type="button" className="text-blue-400 underline">
+          Sign Out
+        </button>
+      </Link>
     </div>
   );
 };
