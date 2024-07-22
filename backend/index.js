@@ -1,20 +1,20 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const cors = require("cors");
-const fetch = require("node-fetch");
-
 const jsonServer = require("json-server");
 const server = jsonServer.create();
-const router = jsonServer.router("data.json");
+const router = jsonServer.router("db.json");
 const middlewares = jsonServer.defaults();
-const port = process.env.PORT || 5500;
+const port = process.env.JSON_PORT || 5500;
 
 server.use(middlewares);
 server.use(router);
 server.listen(port);
 
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const fetch = require("node-fetch");
+
 const app = express();
-const PORT = 5000;
+const BACKEND_PORT = process.env.BACKEND_PORT || 5000;
 const JSON_SERVER_URL = "http://localhost:5500/users";
 
 app.use(cors());
@@ -80,6 +80,6 @@ app.post("/signin", async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+app.listen(BACKEND_PORT, () => {
+  console.log(`Server is running on http://localhost:${BACKEND_PORT}`);
 });
