@@ -32,18 +32,17 @@ const SignUp = () => {
       return; // Stop form submission if validation fails
     }
 
-    fetch(`/signup`, {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(userData),
     })
-      .then((response) => {
+      .then(async (response) => {
         if (!response.ok) {
-          return response.json().then((error) => {
-            throw new Error(error.message);
-          });
+          const error = await response.json();
+          throw new Error(error.message);
         }
         return response.json();
       })
