@@ -2,84 +2,122 @@ const jsonServer = require("json-server");
 const server = jsonServer.create();
 const router = jsonServer.router("db.json");
 const middlewares = jsonServer.defaults();
-const port = process.env.JSON_PORT || 5500;
+const port = process.env.PORT || 8080;
 
 server.use(middlewares);
+server.use(jsonServer.bodyParser);
+
+// const express = require("express");
+// const router =express.Router();
+// const bodyParser = require("body-parser");
+// const cors = require("cors");
+// const fetch = require("node-fetch");
+
+// const app = express();
+// const BACKEND_PORT = process.env.BACKEND_PORT || 5000;
+// const JSON_SERVER_URL = "http://localhost:5500/users";
+
+// app.use(cors());
+// app.use(bodyParser.json());
+
+// app.get("/", (req, res) => {
+//   console.log("GET request received at /");
+//   // res.send("Welcome to the Todo App backend server");
+// });
+
 server.use(router);
-server.listen(port);
-
-const express = require("express");
-const bodyParser = require("body-parser");
-const cors = require("cors");
-const fetch = require("node-fetch");
-
-const app = express();
-const BACKEND_PORT = process.env.BACKEND_PORT || 5000;
-const JSON_SERVER_URL = "http://localhost:5500/users";
-
-app.use(cors());
-app.use(bodyParser.json());
-
-app.get("/", (req, res) => {
-  console.log("GET request received at /");
-  res.send("Welcome to the Todo App backend server");
+server.listen(port, () => {
+  console.log(`JSON Server is running on port ${port}`);
 });
 
-app.post("/signup", async (req, res) => {
+server.get("/users", (req, res) => {
+  const users = router.db.get("users").value();
+  res.json(users);
+});
+
+server.post("/signup", (req, res) => {
   const { username, password } = req.body;
-  // console.log("POST request received at /signup", req.body);
+  const users = router.db.get("users").value();
 
-  try {
-    const response = await fetch(JSON_SERVER_URL);
-    const users = await response.json();
+  if (users.some((user) => user.username === username)) {
+    return res.status(400).json({ message: "User already exists" });
+  }
 
-    if (users.some((user) => user.username === username)) {
-      return res.status(400).json({ message: "User already exists" });
-    }
+  const newUser = { username, password };
+  router.db.get("users").push(newUser).write();
+  res.status(201).json({ message: "User signed up successfully" });
+});
 
-    const newUser = { username, password };
-    const postResponse = await fetch(JSON_SERVER_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newUser),
-    });
+server.post("/signin", (req, res) => {
+  const { username, password } = req.body;
+  const users = router.db.get("users").value();
 
-    if (!postResponse.ok) {
-      throw new Error("Failed to create user");
-    }
+  const user = users.find(
+    (user) => user.username === username && user.password === password
+  );
 
-    res.status(201).json({ message: "User signed up successfully" });
-  } catch (error) {
-    console.error("Error during signup:", error);
-    res.status(500).json({ message: "Internal server error" });
+  if (user) {
+    res.status(200).json({ message: "User signed in successfully" });
+  } else {
+    res.status(400).json({ message: "Invalid credentials" });
   }
 });
 
-app.post("/signin", async (req, res) => {
-  const { username, password } = req.body;
-  // console.log("POST request received at /signin", req.body);
+// server.post("/signup", async (req, res) => {
+//   const { username, password } = req.body;
+//   // console.log("POST request received at /signup", req.body);
 
-  try {
-    const response = await fetch(JSON_SERVER_URL);
-    const users = await response.json();
+//   try {
+//     const response = await fetch(JSON_SERVER_URL);
+//     const users = await response.json();
 
-    const user = users.find(
-      (user) => user.username === username && user.password === password
-    );
+//     if (users.some((user) => user.username === username)) {
+//       return res.status(400).json({ message: "User already exists" });
+//     }
 
-    if (user) {
-      res.status(200).json({ message: "User signed in successfully" });
-    } else {
-      res.status(400).json({ message: "Invalid credentials" });
-    }
-  } catch (error) {
-    console.error("Error during signin:", error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-});
+//     const newUser = { username, password };
+//     const postResponse = await fetch(JSON_SERVER_URL, {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify(newUser),
+//     });
 
-app.listen(BACKEND_PORT, () => {
-  console.log(`Server is running on http://localhost:${BACKEND_PORT}`);
-});
+//     if (!postResponse.ok) {
+//       throw new Error("Failed to create user");
+//     }
+
+//     res.status(201).json({ message: "User signed up successfully" });
+//   } catch (error) {
+//     console.error("Error during signup:", error);
+//     res.status(500).json({ message: "Internal server error" });
+//   }
+// });
+
+// app.post("/signin", async (req, res) => {
+//   const { username, password } = req.body;
+//   // console.log("POST request received at /signin", req.body);
+
+//   try {
+//     const response = await fetch(JSON_SERVER_URL);
+//     const users = await response.json();
+
+//     const user = users.find(
+//       (user) => user.username === username && user.password === password
+//     );
+
+//     if (user) {
+//       res.status(200).json({ message: "User signed in successfully" });
+//     } else {
+//       res.status(400).json({ message: "Invalid credentials" });
+//     }
+//   } catch (error) {
+//     console.error("Error during signin:", error);
+//     res.status(500).json({ message: "Internal server error" });
+//   }
+// });
+
+// // app.listen(BACKEND_PORT, () => {
+// //   console.log(`Server is running on http://localhost:${BACKEND_PORT}`);
+// // });
