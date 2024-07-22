@@ -68,8 +68,9 @@ server.post("/signup", async (req, res) => {
   console.log("POST request received at /signup", req.body);
 
   try {
-    const response = await fetch(JSON_SERVER_URL);
-    const users = await response.json();
+    // const response = await fetch(JSON_SERVER_URL);
+    // const users = await response.json();
+    const users = router.db.get("users").value();
 
     if (users.some((user) => user.username === username)) {
       return res.status(400).json({ message: "User already exists" });
@@ -100,8 +101,7 @@ server.post("/signin", async (req, res) => {
   console.log("POST request received at /signin", req.body);
 
   try {
-    const response = await fetch(JSON_SERVER_URL);
-    const users = await response.json();
+    const users = router.db.get("users").value();
 
     const user = users.find(
       (user) => user.username === username && user.password === password
