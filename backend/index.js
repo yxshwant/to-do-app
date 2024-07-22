@@ -89,7 +89,7 @@ server.post("/signup", async (req, res) => {
       throw new Error("Failed to create user");
     }
 
-    res.status(201).json({ message: "User signed up successfully" });
+    res.json({ message: "User signed up successfully" });
   } catch (error) {
     console.error("Error during signup:", error);
     res.status(500).json({ message: "Internal server error" });
