@@ -15,7 +15,7 @@ server.use(jsonServer.bodyParser);
 
 // const app = express();
 // const BACKEND_PORT = process.env.BACKEND_PORT || 5000;
-// const JSON_SERVER_URL = "http://localhost:5500/users";
+const JSON_SERVER_URL = "https://todo-list-8p53.onrender.com/users";
 
 // app.use(cors());
 // app.use(bodyParser.json());
@@ -35,88 +35,88 @@ server.get("/users", (req, res) => {
   res.json(users);
 });
 
-server.post("/signup", (req, res) => {
-  const { username, password } = req.body;
-  const users = router.db.get("users").value();
-
-  if (users.some((user) => user.username === username)) {
-    return res.status(400).json({ message: "User already exists" });
-  }
-
-  const newUser = { username, password };
-  router.db.get("users").push(newUser).write();
-  res.status(201).json({ message: "User signed up successfully" });
-});
-
-server.post("/signin", (req, res) => {
-  const { username, password } = req.body;
-  const users = router.db.get("users").value();
-
-  const user = users.find(
-    (user) => user.username === username && user.password === password
-  );
-
-  if (user) {
-    res.status(200).json({ message: "User signed in successfully" });
-  } else {
-    res.status(400).json({ message: "Invalid credentials" });
-  }
-});
-
-// server.post("/signup", async (req, res) => {
+// server.post("/signup", (req, res) => {
 //   const { username, password } = req.body;
-//   // console.log("POST request received at /signup", req.body);
+//   const users = router.db.get("users").value();
 
-//   try {
-//     const response = await fetch(JSON_SERVER_URL);
-//     const users = await response.json();
+//   if (users.some((user) => user.username === username)) {
+//     return res.status(400).json({ message: "User already exists" });
+//   }
 
-//     if (users.some((user) => user.username === username)) {
-//       return res.status(400).json({ message: "User already exists" });
-//     }
+// const newUser = { username, password };
+//   router.db.get("users").push(newUser).write();
+//   res.status(201).json({ message: "User signed up successfully" });
+// });
 
-//     const newUser = { username, password };
-//     const postResponse = await fetch(JSON_SERVER_URL, {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(newUser),
-//     });
+// server.post("/signin", (req, res) => {
+//   const { username, password } = req.body;
+//   const users = router.db.get("users").value();
 
-//     if (!postResponse.ok) {
-//       throw new Error("Failed to create user");
-//     }
+//   const user = users.find(
+//     (user) => user.username === username && user.password === password
+//   );
 
-//     res.status(201).json({ message: "User signed up successfully" });
-//   } catch (error) {
-//     console.error("Error during signup:", error);
-//     res.status(500).json({ message: "Internal server error" });
+//   if (user) {
+//     res.status(200).json({ message: "User signed in successfully" });
+//   } else {
+//     res.status(400).json({ message: "Invalid credentials" });
 //   }
 // });
 
-// app.post("/signin", async (req, res) => {
-//   const { username, password } = req.body;
-//   // console.log("POST request received at /signin", req.body);
+server.post("/signup", async (req, res) => {
+  const { username, password } = req.body;
+  console.log("POST request received at /signup", req.body);
 
-//   try {
-//     const response = await fetch(JSON_SERVER_URL);
-//     const users = await response.json();
+  try {
+    const response = await fetch(JSON_SERVER_URL);
+    const users = await response.json();
 
-//     const user = users.find(
-//       (user) => user.username === username && user.password === password
-//     );
+    if (users.some((user) => user.username === username)) {
+      return res.status(400).json({ message: "User already exists" });
+    }
 
-//     if (user) {
-//       res.status(200).json({ message: "User signed in successfully" });
-//     } else {
-//       res.status(400).json({ message: "Invalid credentials" });
-//     }
-//   } catch (error) {
-//     console.error("Error during signin:", error);
-//     res.status(500).json({ message: "Internal server error" });
-//   }
-// });
+    const newUser = { username, password };
+    const postResponse = await fetch(JSON_SERVER_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newUser),
+    });
+
+    if (!postResponse.ok) {
+      throw new Error("Failed to create user");
+    }
+
+    res.status(201).json({ message: "User signed up successfully" });
+  } catch (error) {
+    console.error("Error during signup:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+server.post("/signin", async (req, res) => {
+  const { username, password } = req.body;
+  console.log("POST request received at /signin", req.body);
+
+  try {
+    const response = await fetch(JSON_SERVER_URL);
+    const users = await response.json();
+
+    const user = users.find(
+      (user) => user.username === username && user.password === password
+    );
+
+    if (user) {
+      res.status(200).json({ message: "User signed in successfully" });
+    } else {
+      res.status(400).json({ message: "Invalid credentials" });
+    }
+  } catch (error) {
+    console.error("Error during signin:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
 
 // // app.listen(BACKEND_PORT, () => {
 // //   console.log(`Server is running on http://localhost:${BACKEND_PORT}`);
