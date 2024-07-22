@@ -32,8 +32,8 @@ const SignUp = () => {
       return; // Stop form submission if validation fails
     }
 
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/signup`, {
-      // method: "POST",
+    fetch(`/signup`, {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
