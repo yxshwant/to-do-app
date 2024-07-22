@@ -20,5 +20,49 @@
       "username": "chaman01@gmail.com",
       "password": "chaman01"
     }
+  ],
+  "signup": [
+    {
+      "id": "423e",
+      "username": "shree10@gmail.com",
+      "password": "shree10"
+    },
+    {
+      "id": "34f6",
+      "username": "ram11@gmail.com",
+      "password": "ram_11"
+    },
+    {
+      "id": "5114",
+      "username": "vijay123@gmail.com",
+      "password": "vijay123"
+    },
+    {
+      "id": "4f12",
+      "username": "chaman01@gmail.com",
+      "password": "chaman01"
+    }
+  ],
+  "signin": [
+    {
+      "id": "423e",
+      "username": "shree10@gmail.com",
+      "password": "shree10"
+    },
+    {
+      "id": "34f6",
+      "username": "ram11@gmail.com",
+      "password": "ram_11"
+    },
+    {
+      "id": "5114",
+      "username": "vijay123@gmail.com",
+      "password": "vijay123"
+    },
+    {
+      "id": "4f12",
+      "username": "chaman01@gmail.com",
+      "password": "chaman01"
+    }
   ]
 }

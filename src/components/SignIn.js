@@ -17,8 +17,8 @@ const SignIn = ({ onAuth }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/users`, {
-      method: "GET",
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/signin`, {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
@@ -74,7 +74,10 @@ const SignIn = ({ onAuth }) => {
             onChange={handleChange}
           />
         </div>
-        <button type="submit" className="p-2 bg-green-500 text-white text-lg rounded">
+        <button
+          type="submit"
+          className="p-2 bg-green-500 text-white text-lg rounded"
+        >
           Sign In
         </button>
       </form>
