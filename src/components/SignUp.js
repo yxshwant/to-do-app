@@ -33,7 +33,7 @@ const SignUp = () => {
     }
 
     fetch(`${process.env.REACT_APP_BACKEND_URL}/signup`, {
-      method: "POST",
+      // method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
