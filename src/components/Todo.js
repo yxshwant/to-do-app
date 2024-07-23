@@ -69,7 +69,7 @@ const Todo = () => {
         Completed Items: {completedItems} / {todos.length}
       </p>
       <Link to="/signout">
-        <button type="button" className="text-blue-400 underline">
+        <button type="button" className="signout text-blue-400 text-lg bg-black mt-4">
           Sign Out
         </button>
       </Link>
