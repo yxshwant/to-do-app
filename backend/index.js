@@ -92,8 +92,12 @@ server.post("/users", async (req, res) => {
         body: JSON.stringify(newUser),
       });
 
+      const postResponseData = await postResponse.json();
+      console.log('Post response status:', postResponse.status);
+      console.log('Post response data:', postResponseData);
+
       if (!postResponse.ok) {
-        throw new Error("Failed to create user");
+        throw new Error(`Failed to create user: ${postResponseData.message || 'Unknown error'}`);
       }
 
       res.status(201).json({ message: "User signed up successfully" });
