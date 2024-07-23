@@ -60,8 +60,12 @@ const JSON_SERVER_URL = "https://todo-list-8p53.onrender.com/users";
 
 server.post("/users", async (req, res) => {
   console.log(req.body);
-  const { action, userData } = req.body;
-  const { username, password } = userData;
+  const { action, userData: { username, password } = {} } = req.body;
+  // const { username, password } = userData;
+
+  if (!username || !password) {
+    return res.status(400).json({ message: "Username or password is missing" });
+  }
 
   if (action === "signup") {
     console.log("POST request received at /signup", req.body);
