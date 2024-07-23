@@ -58,61 +58,86 @@ const JSON_SERVER_URL = "https://todo-list-8p53.onrender.com/users";
 //   }
 // });
 
-server.post("/signup", async (req, res) => {
-  const { username, password } = req.body;
-  console.log("POST request received at /signup", req.body);
+server.post("/users", async (req, res) => {
+  const { action, userData } = req.body;
+  const { username, password } = userData;
 
-  try {
-    const response = await fetch(JSON_SERVER_URL);
-    const users = await response.json();
-    // const users = router.db.get("users").value();
+  if (action === "signup") {
+    console.log("POST request received at /signup", req.body);
 
-    if (users.some((user) => user.username === username)) {
-      return res.status(400).json({ message: "User already exists" });
+    try {
+      const response = await fetch(JSON_SERVER_URL);
+      const users = await response.json();
+      // const users = router.db.get("users").value();
+
+      if (users.some((user) => user.username === username)) {
+        return res.status(400).json({ message: "User already exists" });
+      }
+
+      const newUser = { username, password };
+      const postResponse = await fetch(JSON_SERVER_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newUser),
+      });
+
+      if (!postResponse.ok) {
+        throw new Error("Failed to create user");
+      }
+
+      res.status(201).json({ message: "User signed up successfully" });
+    } catch (error) {
+      console.error("Error during signup:", error);
+      res.status(500).json({ message: "Internal server error" });
     }
+  } else {
+    console.log("POST request received at /signin", req.body);
 
-    const newUser = { username, password };
-    const postResponse = await fetch(JSON_SERVER_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newUser),
-    });
+    try {
+      const response = await fetch(JSON_SERVER_URL);
+      const users = await response.json();
 
-    if (!postResponse.ok) {
-      throw new Error("Failed to create user");
+      const user = users.find(
+        (user) => user.username === username && user.password === password
+      );
+
+      if (user) {
+        res.status(200).json({ message: "User signed in successfully" });
+      } else {
+        res.status(400).json({ message: "Invalid credentials" });
+      }
+    } catch (error) {
+      console.error("Error during signin:", error);
+      res.status(500).json({ message: "Internal server error" });
     }
-
-    res.status(201).json({ message: "User signed up successfully" });
-  } catch (error) {
-    console.error("Error during signup:", error);
-    res.status(500).json({ message: "Internal server error" });
   }
 });
 
-server.post("/signin", async (req, res) => {
-  const { username, password } = req.body;
-  console.log("POST request received at /signin", req.body);
+// server.post("/users", async (req, res) => {
+//   const { action, userData } = req.body;
+//   const { username, password } = userData;
+//   console.log("POST request received at /signin", req.body);
 
-  try {
-    const response = await fetch(JSON_SERVER_URL);
-    const users = await response.json();
+//   try {
+//     const response = await fetch(JSON_SERVER_URL);
+//     const users = await response.json();
 
-    const user = users.find(
-      (user) => user.username === username && user.password === password
-    );
+//     const user = users.find(
+//       (user) => user.username === username && user.password === password
+//     );
 
-    if (user) {
-      res.status(200).json({ message: "User signed in successfully" });
-    } else {
-      res.status(400).json({ message: "Invalid credentials" });
-    }
-  } catch (error) {
-    console.error("Error during signin:", error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-});
+//     if (user) {
+//       res.status(200).json({ message: "User signed in successfully" });
+//     } else {
+//       res.status(400).json({ message: "Invalid credentials" });
+//     }
+//   } catch (error) {
+//     console.error("Error during signin:", error);
+//     res.status(500).json({ message: "Internal server error" });
+//   }
+// });
 
 server.use(router);
 server.listen(port, () => {

@@ -32,12 +32,12 @@ const SignUp = () => {
       return; // Stop form submission if validation fails
     }
 
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/singup`, {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/users`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(userData),
+      body: JSON.stringify({ action: 'signup', userData }),
     })
       .then((response) => {
         if (!response.ok) {
