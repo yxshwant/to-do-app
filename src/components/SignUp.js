@@ -32,7 +32,7 @@ const SignUp = () => {
       return; // Stop form submission if validation fails
     }
 
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/users`, {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/singup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -41,14 +41,15 @@ const SignUp = () => {
     })
       .then((response) => {
         if (!response.ok) {
-          const error = response.json();
-          throw new Error(error.message);
+          return response.json().then((error) => {
+            throw new Error(error.message);
+          });
         }
         return response.json();
       })
       .then((data) => {
-        if (data.message === "SUCCESS") {
-          alert(data.message);
+        alert(data.message);
+        if (data.message === "User signed up successfully") {
           navigate("/signin");
         }
       })

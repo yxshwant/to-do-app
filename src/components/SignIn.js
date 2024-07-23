@@ -17,7 +17,7 @@ const SignIn = ({ onAuth }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/users`, {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/signin`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -26,13 +26,14 @@ const SignIn = ({ onAuth }) => {
     })
       .then((response) => {
         if (!response.ok) {
-          const error = response.json();
-          throw new Error(error.message);
+          return response.json().then((error) => {
+            throw new Error(error.message);
+          });
         }
         return response.json();
       })
       .then((data) => {
-        if (data.message === "SUCCESS") {
+        if (data.message === "User signed in successfully") {
           onAuth(true);
           navigate("/todo");
         } else {
