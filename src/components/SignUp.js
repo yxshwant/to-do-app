@@ -39,16 +39,16 @@ const SignUp = () => {
       },
       body: JSON.stringify(userData),
     })
-      .then(async (response) => {
+      .then((response) => {
         if (!response.ok) {
-          const error = await response.json();
+          const error = response.json();
           throw new Error(error.message);
         }
         return response.json();
       })
       .then((data) => {
-        alert(data.message);
-        if (data.message === "User signed up successfully") {
+        if (data.message === "SUCCESS") {
+          alert(data.message);
           navigate("/signin");
         }
       })

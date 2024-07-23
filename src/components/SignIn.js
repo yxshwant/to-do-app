@@ -26,14 +26,13 @@ const SignIn = ({ onAuth }) => {
     })
       .then((response) => {
         if (!response.ok) {
-          return response.json().then((error) => {
-            throw new Error(error.message);
-          });
+          const error = response.json();
+          throw new Error(error.message);
         }
         return response.json();
       })
       .then((data) => {
-        if (data.message === "User signed in successfully") {
+        if (data.message === "SUCCESS") {
           onAuth(true);
           navigate("/todo");
         } else {

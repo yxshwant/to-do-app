@@ -35,33 +35,33 @@ server.get("/users", (req, res) => {
   res.json(users);
 });
 
-server.post("/signup", (req, res) => {
-  const { username, password } = req.body;
-  const users = router.db.get("users").value();
+// server.post("/signup", (req, res) => {
+//   const { username, password } = req.body;
+//   const users = router.db.get("users").value();
 
-  if (users.some((user) => user.username === username)) {
-    return res.status(400).json({ message: "User already exists" });
-  }
+//   if (users.some((user) => user.username === username)) {
+//     return res.status(400).json({ message: "User already exists" });
+//   }
 
-const newUser = { username, password };
-  router.db.get("users").push(newUser).write();
-  res.status(201).json({ message: "User signed up successfully" });
-});
+// const newUser = { username, password };
+//   router.db.get("users").push(newUser).write();
+//   res.status(201).json({ message: "User signed up successfully" });
+// });
 
-server.post("/signin", (req, res) => {
-  const { username, password } = req.body;
-  const users = router.db.get("users").value();
+// server.post("/signin", (req, res) => {
+//   const { username, password } = req.body;
+//   const users = router.db.get("users").value();
 
-  const user = users.find(
-    (user) => user.username === username && user.password === password
-  );
+//   const user = users.find(
+//     (user) => user.username === username && user.password === password
+//   );
 
-  if (user) {
-    res.status(200).json({ message: "User signed in successfully" });
-  } else {
-    res.status(400).json({ message: "Invalid credentials" });
-  }
-});
+//   if (user) {
+//     res.status(200).json({ message: "User signed in successfully" });
+//   } else {
+//     res.status(400).json({ message: "Invalid credentials" });
+//   }
+// });
 
 // server.post("/signup", async (req, res) => {
 //   const { username, password } = req.body;
