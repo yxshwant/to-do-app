@@ -37,7 +37,13 @@ const SignUp = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ action: 'signup', userData }),
+      body: JSON.stringify({
+        action: "signup",
+        userData: {
+          username: userData.username,
+          password: userData.password,
+        },
+      }),
     })
       .then((response) => {
         if (!response.ok) {

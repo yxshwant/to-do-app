@@ -59,6 +59,7 @@ const JSON_SERVER_URL = "https://todo-list-8p53.onrender.com/users";
 // });
 
 server.post("/users", async (req, res) => {
+  console.log(req.body);
   const { action, userData } = req.body;
   const { username, password } = userData;
 

@@ -22,7 +22,13 @@ const SignIn = ({ onAuth }) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ action: 'signin', credentials }),
+      body: JSON.stringify({
+        action: "signin",
+        userData: {
+          username: credentials.username,
+          password: credentials.password,
+        },
+      }),
     })
       .then((response) => {
         if (!response.ok) {
