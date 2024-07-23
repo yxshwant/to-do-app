@@ -81,11 +81,12 @@ server.post("/users", async (req, res) => {
       }
       console.log(username);
       console.log(password);
-      const newUser = { username, password };
+      const newUser = { id: Date.now().toString(), username, password };
       console.log(newUser);
       const postResponse = await fetch(JSON_SERVER_URL, {
         method: "POST",
         headers: {
+          Accept: "application/json, text/plain, */*",
           "Content-Type": "application/json",
         },
         body: JSON.stringify(newUser),
