@@ -74,12 +74,15 @@ server.post("/users", async (req, res) => {
       const response = await fetch(JSON_SERVER_URL);
       const users = await response.json();
       // const users = router.db.get("users").value();
+      console.log(users);
 
       if (users.some((user) => user.username === username)) {
         return res.status(400).json({ message: "User already exists" });
       }
-
+      console.log(username);
+      console.log(password);
       const newUser = { username, password };
+      console.log(newUser);
       const postResponse = await fetch(JSON_SERVER_URL, {
         method: "POST",
         headers: {
