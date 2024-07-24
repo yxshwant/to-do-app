@@ -2,7 +2,7 @@
 
 This is a simple Todo-App to manage your todos.
 
-## ⏩Link : <a href="https://mytodo-it.netlify.app/">Todo-it.</a>
+## ⏩Link : <a href="https://mytodo-it.netlify.app/" target="_blank">Todo-it.</a>
 
 - `NOTE:` The initial response may take some time to load.
 
@@ -18,6 +18,7 @@ This is a simple Todo-App to manage your todos.
 | ------ | -------------------- | ---------- |
 | User-1 | `vijay123@gmail.com` | `vijay123` |
 | User-2 | `shree10@gmail.com`  | `shree10`  |
+| User-3 | `ram11@gmail.com`    | `ram_11`   |
 
 ## 💼Tech-Stack : <a name = "tech-stack"></a>
 
