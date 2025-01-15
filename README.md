@@ -2,7 +2,7 @@
 
 This is a simple Todo-App to manage your todos.
 
-## ⏩Link : [Todo-it](https://mytodo-it.netlify.app/)
+## ⏩Link : https://mytodo-it.netlify.app
 
 - `NOTE:` The initial response may take some time to load.
 
